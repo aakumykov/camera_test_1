@@ -60,7 +60,10 @@ var app = {
             //alert(imageData);
             var image = document.getElementById('photo_picture');
                 image.src = "data:image/jpeg;base64,"+imageData;
-            //navigator.camera.cleanup();
+            navigator.camera.cleanup(
+                function(){},
+                function(msg){ alert('Ошибка очистки фотокамеры: '+msg)}
+            );
         }
 
         function onFail(message) {
