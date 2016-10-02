@@ -48,8 +48,9 @@ var app = {
 			onFail, 
 			{ 
 				quality: 50, 
-				sourceType: Camera.PictureSourceType.CAMERA,
-				//sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+				
+				//sourceType: Camera.PictureSourceType.CAMERA,
+				sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 				
 				destinationType: Camera.DestinationType.DATA_URL,
 				//destinationType: Camera.DestinationType.FILE_URI,
