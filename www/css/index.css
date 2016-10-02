@@ -24,3 +24,12 @@
     width: 100%;
     max-width: 260px;
 }
+
+FIELDSET {
+    float: left;
+}
+
+#info {
+    width:100%;
+    max-width: 260px;
+}

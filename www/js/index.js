@@ -41,30 +41,50 @@ var app = {
 	displayInfo: function(msg) {
 		document.getElementById('info').innerHTML = String(msg);
 	},
+	//
+	getOptions: function() {
+		var s_type = document.forms.sourceType.s_type.value;
+		if ('camera'==s_type) {
+			this.sourceType = Camera.PictureSourceType.CAMERA;
+			this.srcMode = 'camera';
+		} else {
+			this.sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
+			this.srcMode = 'gallery';
+		}
+
+		var d_type = document.forms.destinationType.d_type.value;
+		if ('data_url'==d_type) {
+			this.destinationType = Camera.DestinationType.DATA_URL;
+			this.dstMode = 'data';
+		} else {
+			this.destinationType = Camera.DestinationType.FILE_URI;
+			this.dstMode = 'uri';
+		}
+	},
 	// Фотокамера
 	takeAPhoto: function(){
+		app.getOptions();
+
 		navigator.camera.getPicture(
 			onSuccess, 
 			onFail, 
 			{ 
 				quality: 50, 
-				
-				//sourceType: Camera.PictureSourceType.CAMERA,
-				sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-				
-				destinationType: Camera.DestinationType.DATA_URL,
-				//destinationType: Camera.DestinationType.FILE_URI,
-
+				sourceType: app.sourceType,
+				destinationType: app.destinationType,
 				allowEdit: true,
 				encodingType: Camera.EncodingType.PNG,
 			}
 		);
 
 		function onSuccess(imageData) {
-			app.displayInfo(typeof(imageData)+', '+imageData.length);
+			app.displayInfo('srcMode: '+app.srcMode+', dstMode: '+app.dstMode);
 
 			var image = document.getElementById('photo_picture');
-			image.src = "data:image/jpeg;base64,"+imageData;
+			
+			var image_source = ('data'==app.dstMode) ? "data:image/jpeg;base64,"+imageData : imageData;
+
+			image.src = image_source;
 		}
 
 		function onFail(message) {
