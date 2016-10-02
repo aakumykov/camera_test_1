@@ -56,9 +56,11 @@ var app = {
             { quality: 50, destinationType: Camera.DestinationType.FILE_URI }
         );
 
-        function onSuccess(imageURI) {
-            var image = document.getElementById('photo');
-            image.src = imageURI;
+        function onSuccess(imageData) {
+            //alert(imageData);
+            var image = document.getElementById('photo_picture');
+                image.src = "data:image/jpeg;base64,"+imageData;
+            //navigator.camera.cleanup();
         }
 
         function onFail(message) {
