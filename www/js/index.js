@@ -70,15 +70,24 @@ var app = {
 			onFail, 
 			{ 
 				quality: 50, 
-				sourceType: app.sourceType,
-				destinationType: app.destinationType,
-				allowEdit: true,
-				encodingType: Camera.EncodingType.PNG,
+				correctOrientation: true,
+				targetHeight: 500,
+				targetWidth: 500,
+				sourceType: Camera.PictureSourceType.CAMERA,
+				destinationType: Camera.DestinationType.FILE_URI,
+				allowEdit: false,
+				encodingType: Camera.EncodingType.JPEG,
 			}
 		);
 
 		function onSuccess(imageData) {
-			app.displayInfo('srcMode: '+app.srcMode+', dstMode: '+app.dstMode);
+			//app.displayInfo('srcMode: '+app.srcMode+', dstMode: '+app.dstMode);
+			//alert(app.dstMode);
+			app.displayInfo(
+				//'pendingResult.result: '+pendingResult.result+"<br>"+
+				//'pendingResult.pluginStatus: '+pendingResult.pluginStatus+"<br>"+
+				imageData
+			);
 
 			var image = document.getElementById('photo_picture');
 			
