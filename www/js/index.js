@@ -65,7 +65,8 @@ var app = {
 		function onSuccess(imageData) {
 			var image_ratio = document.getElementById('image_ratio').value;
 
-			app.displayInfo(imageData.length);
+			var display_msg = ('data'==app.dstMode) ? 'data length: '+imageData.length : imageData;
+			app.displayInfo(display_msg);
 
 			var visible_image = document.getElementById('visibleImage');
 			var hidden_image = document.getElementById('hiddenImage');
