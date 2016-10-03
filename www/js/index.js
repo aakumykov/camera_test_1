@@ -63,19 +63,22 @@ var app = {
 		);
 
 		function onSuccess(imageData) {
-			//app.displayInfo('srcMode: '+app.srcMode+', dstMode: '+app.dstMode);
-			//alert(app.dstMode);
-			app.displayInfo(
-				//'pendingResult.result: '+pendingResult.result+"<br>"+
-				//'pendingResult.pluginStatus: '+pendingResult.pluginStatus+"<br>"+
-				imageData
-			);
+			var image_ratio = document.getElementById('image_ratio').value;
 
-			var image = document.getElementById('photo_picture');
+			app.displayInfo(imageData.length);
+
+			var visible_image = document.getElementById('visibleImage');
+			var hidden_image = document.getElementById('hiddenImage');
+			var canvas = document.getElementById('theCanvas');
+			var ctx = canvas.getContext('2d');
 			
-			var image_source = ('data'==app.dstMode) ? "data:image/jpeg;base64,"+imageData : imageData;
+			hidden_image.src = ('data'==app.dstMode) ? "data:image/jpeg;base64,"+imageData : imageData;
 
-			image.src = image_source;
+			var newImageWidth = canvas.width = hidden_image.width * image_ratio;
+			var newImageHeight = canvas.height = hidden_image.height * (newImageWidth / hidden_image.width);
+			
+			ctx.drawImage(hidden_image, 0, 0, newImageWidth, newImageHeight);
+			visible_image.src = canvas.toDataURL('image/jpeg');
 		}
 
 		function onFail(message) {

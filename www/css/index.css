@@ -33,3 +33,12 @@ FIELDSET {
     width:100%;
     max-width: 260px;
 }
+
+#hiddenImage {
+	display: none;
+}
+
+#theCanvas {
+	display: none;
+}
+
